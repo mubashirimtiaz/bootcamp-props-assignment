@@ -6,7 +6,7 @@ name: Deploy react app on surge
 # events but only for the master branch
 on:
   push:
-    branches: [ master ]
+    branches: [master]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -17,26 +17,26 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - uses: actions/checkout@v2
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
 
-    # Runs a single command using the runners shell
-    - name: Install Node
-      uses: actions/setup-node@v2-beta
-      with:
-        node-version: 12
+      # Runs a single command using the runners shell
+      - name: Install Node
+        uses: actions/setup-node@v2-beta
+        with:
+          node-version: 12
 
-    # Runs a set of commands using the runners shell
-    - name: Install Yarn 
-      uses: Borales/actions-yarn@v2.3.0
-      with:
-        cmd: install
-    # Build react app with yarn
-    - name: Yarn build
-      run: yarn build
-    # Installing surge
-    - name: Install surge
-      run: npm install --global surge
-    # deloy app on surge
-    - name: Deploy app on surge
-      run: surge ./build bootcamp-props-assignment --token ${{ secrets.SURGE_TOKEN }}  
+      # Runs a set of commands using the runners shell
+      - name: Install Yarn
+        uses: Borales/actions-yarn@v2.3.0
+        with:
+          cmd: install
+      # Build react app with yarn
+      - name: Build yarn
+        run: yarn build
+      # Installing surge
+      - name: Install surge
+        run: npm install --global surge
+      # deloy app on surge
+      - name: Deploy app on surge
+        run: surge ./build bootcamp-props-assignment.surge.sh --token ${{ secrets.SURGE_TOKEN }}
